@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BookShop
 {
-    internal class ArtBook: ProtoBook
+    public class ArtBook: ProtoBook
     {
         static ArtBook()
         {
