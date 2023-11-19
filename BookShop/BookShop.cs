@@ -26,6 +26,7 @@ namespace BookShop
             Distributor = distributor;
             Balance = StartBalance;
             OwnedLiterature = new List<ProtoBook>();
+            Customers = new List<Customer>();
         }
 
         public void Sell(ProtoBook Item, IBookOwner NewOwner)
