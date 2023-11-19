@@ -33,5 +33,10 @@ namespace BookShop
         {
             throw new NotImplementedException();
         }
+
+        public bool OrderBook(ProtoBook item, int Quanity)
+        { 
+            throw new NotImplementedException(); 
+        }
     }
 }
