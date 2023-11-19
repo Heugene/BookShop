@@ -8,7 +8,7 @@ namespace BookShop
 {
     public abstract class ProtoBook
     {
-        public static string LitType;
+        public static string LitType = "None";
         public string Name {  get; private set; }
         public string Author { get; private set; }
         public int YearPublished { get; private set; }
