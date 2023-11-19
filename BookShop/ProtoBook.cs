@@ -16,6 +16,7 @@ namespace BookShop
         public int PagesCount { get; private set; }
         public bool Colourful { get; private set; }
         public decimal Price { get; private set; }
+        public IBookOwner Owner { get; private set; }
 
         public string Read()
         {
