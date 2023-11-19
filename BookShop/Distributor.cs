@@ -19,6 +19,7 @@ namespace BookShop
             Name = name;
             Address = address;
             Phone = phone;
+            OwnedLiterature = new List<ProtoBook>();
         }
 
         public void Sell(ProtoBook Item, IBookOwner NewOwner)
