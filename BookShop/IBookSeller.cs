@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BookShop
 {
-    public interface IBookSeller
+    public interface IBookOwner
     {
         public List<ProtoBook> OwnedLiterature {get; set;}
     }
