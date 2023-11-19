@@ -16,5 +16,7 @@ namespace BookShop
         public Comix(string name, string author, int yearPublished, string isbn, int pagesCount, bool Colourful, decimal price) : base(name, author, yearPublished, isbn, pagesCount, Colourful, price)
         {
         }
+
+        public Comix(Comix clone) : base(clone) { }
     }
 }

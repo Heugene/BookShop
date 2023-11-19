@@ -6,15 +6,17 @@ using System.Threading.Tasks;
 
 namespace BookShop
 {
-    public class ArtBook: ProtoBook
+    public class Artbook: ProtoBook
     {
-        static ArtBook()
+        static Artbook()
         {
             LitType = "ArtBook";
         }
 
-        public ArtBook(string name, string author, int yearPublished, string isbn, int pagesCount, bool Colourful, decimal price) : base(name, author, yearPublished, isbn, pagesCount, Colourful, price)
+        public Artbook(string name, string author, int yearPublished, string isbn, int pagesCount, bool Colourful, decimal price) : base(name, author, yearPublished, isbn, pagesCount, Colourful, price)
         {
         }
+
+        public Artbook(Artbook clone) : base(clone) { }
     }
 }
