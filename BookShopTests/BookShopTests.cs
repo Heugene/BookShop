@@ -11,7 +11,7 @@ namespace BookShopTests
         {
             //arrange
             int initialBalance = 10000;
-            Artbook artbook = new Artbook("TestTitle", "TestAuthor", 2012, "978-3-16-148410-0", 342, true, 199.99M);
+            Book artbook = new Book(LitType.ArtBook, "TestTitle", "TestAuthor", 2012, "978-3-16-148410-0", new string[] { "horror", "adventure" }, 342, true, 199.99M);
             Distributor distributor = new Distributor("aboba", "amogus", "92380483084034");
             BookShop.BookShop shop = new BookShop.BookShop("aboba", "amogus", "92380483084034", 1.2M, distributor, initialBalance);
             Customer customer = new Customer("Petro");
@@ -29,7 +29,7 @@ namespace BookShopTests
         {
             //arrange
             int initialBalance = 10000;
-            Artbook artbook = new Artbook("TestTitle", "TestAuthor", 2012, "978-3-16-148410-0", 342, true, 199.99M);
+            Book artbook = new Book(LitType.ArtBook, "TestTitle", "TestAuthor", 2012, "978-3-16-148410-0", new string[] { "horror", "adventure" }, 342, true, 199.99M);
             Distributor distributor = new Distributor("aboba", "amogus", "92380483084034");
             BookShop.BookShop shop = new BookShop.BookShop("aboba", "amogus", "92380483084034", 1.2M, distributor, initialBalance);
             artbook.ChangeOwner(distributor);
@@ -46,13 +46,13 @@ namespace BookShopTests
         {
             //arrange
             int initialBalance = 1000;
-            Book book = new Book("TestTitle", "TestAuthor", 2012, "978-3-16-148410-0", 342, true, 199.99M);
+            Book artbook = new Book(LitType.ArtBook, "TestTitle", "TestAuthor", 2012, "978-3-16-148410-0", new string[] { "horror", "adventure" }, 342, true, 199.99M);
             Distributor distributor = new Distributor("aboba", "amogus", "92380483084034");
             BookShop.BookShop shop = new BookShop.BookShop("aboba", "amogus", "92380483084034", 1.2M, distributor, initialBalance);
-            book.ChangeOwner(distributor);
+            artbook.ChangeOwner(distributor);
 
             //act
-            bool result = shop.OrderBook(book, 10);
+            bool result = shop.OrderBook(artbook, 10);
 
             //assert
             Assert.IsFalse(result);

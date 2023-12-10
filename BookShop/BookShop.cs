@@ -6,35 +6,28 @@ using System.Threading.Tasks;
 
 namespace BookShop
 {
-    public class BookShop: IBookOwner, IBookSeller
+    public class BookShop: Organization, IBookOwner, IBookSeller
     {
-        public string Name { get; private set; }
-        public string Address { get; private set; }
-        public string Phone { get; private set; }
         public decimal ProfitFactor { get; private set; } = 1.2M;
         public Distributor Distributor { get; private set; }
         public List<Customer> Customers { get; private set; }
-        public decimal Balance { get; private set; }
-        public List<ProtoBook> OwnedLiterature { get; set; }
+        public List<Book> OwnedLiterature { get; set; }
 
-        public BookShop(string name, string address, string phone, decimal profitFactor, Distributor distributor, decimal StartBalance)
+        public BookShop(string name, string address, string phone, decimal profitFactor, Distributor distributor, decimal StartBalance) : base (name, address, phone)
         {
-            Name = name;
-            Address = address;
-            Phone = phone;
             ProfitFactor = profitFactor;
             Distributor = distributor;
             Balance = StartBalance;
-            OwnedLiterature = new List<ProtoBook>();
+            OwnedLiterature = new List<Book>();
             Customers = new List<Customer>();
         }
 
-        public void Sell(ProtoBook Item, IBookOwner NewOwner)
+        public void Sell(Book Item, IBookOwner NewOwner)
         {
             throw new NotImplementedException();
         }
 
-        public bool OrderBook(ProtoBook item, int Quanity)
+        public bool OrderBook(Book item, int Quanity)
         { 
             throw new NotImplementedException(); 
         }

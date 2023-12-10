@@ -6,17 +6,43 @@ using System.Threading.Tasks;
 
 namespace BookShop
 {
-    public class Book : ProtoBook
+    public class Book : ICloneable
     {
-        static Book()
+        public LitType LitType { get; private set; }
+        public string Name {  get; private set; }
+        public string Author { get; private set; }
+        public int YearPublished { get; private set; }
+        public string ISBN { get; private set; }
+        public string[] Genres { get; private set; }
+        public int PagesCount { get; private set; }
+        public bool Colourful { get; private set; }
+        public decimal Price { get; private set; }
+        public IBookOwner Owner { get; private set; }
+
+
+        public void ChangeOwner(IBookOwner bookOwner)
         {
-            LitType = "Book";
+            throw new NotImplementedException();
         }
 
-        public Book(string name, string author, int yearPublished, string isbn, int pagesCount, bool Colourful, decimal price) : base(name, author, yearPublished, isbn, pagesCount, Colourful, price)
+        public string Info()
         {
+            throw new NotImplementedException();
         }
 
-        public Book(Book clone): base(clone) { }
+        public void Print()
+        {
+            throw new NotImplementedException();
+        }
+
+        public object Clone()
+        {
+            return this.MemberwiseClone();
+        }
+
+        public Book(LitType litType, string name, string author, int yearPublished, string isbn, string[] genres, int pagesCount, bool Colourful, decimal price)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

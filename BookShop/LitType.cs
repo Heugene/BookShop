@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace BookShop
 {
-    public interface IBookSeller
+    public enum LitType
     {
-        public void Sell(Book Item, IBookOwner NewOwner);
+        Book,
+        ArtBook,
+        Comix
     }
 }

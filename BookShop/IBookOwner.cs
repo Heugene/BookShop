@@ -8,6 +8,6 @@ namespace BookShop
 {
     public interface IBookOwner
     {
-        public List<ProtoBook> OwnedLiterature {get; set;}
+        public List<Book> OwnedLiterature {get; set;}
     }
 }
