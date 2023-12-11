@@ -27,7 +27,7 @@
 - .NET 7.0;
 
 ## ClassDiagram
-"https://github.com/Heugene/BookShop/blob/86a848367e952f100f75800d753aee65939744ba/ClassDiagram.png"
+"https://github.com/Heugene/BookShop/blob/master/ClassDiagram.png"
 
 ## Installation
 
