@@ -10,7 +10,7 @@ namespace BookShop
     {
         public string Name { get; private set; }
 
-        public List<Book> OwnedLiterature { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public List<Book> OwnedLiterature { get; set; }
 
         public Customer(string name)
         {

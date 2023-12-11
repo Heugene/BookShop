@@ -21,9 +21,6 @@ namespace BookShop
             Balance = 0;
         }
 
-        public string Info()
-        {
-            return "---";
-        }
+        public abstract string Info();
     }
 }

@@ -15,13 +15,31 @@ namespace BookShopTests
             Distributor distributor = new Distributor("aboba", "amogus", "92380483084034");
             BookShop.BookShop shop = new BookShop.BookShop("aboba", "amogus", "92380483084034", 1.2M, distributor, initialBalance);
             Customer customer = new Customer("Petro");
-            artbook.ChangeOwner(shop);
+            distributor.PublishBook(artbook);
+            distributor.Sell(artbook, shop);
 
             //act
-            shop.Sell(artbook, customer);
+            shop.Sell(shop.OwnedLiterature.First(), customer);
 
             //assert
-            Assert.IsTrue(!shop.OwnedLiterature.Contains(artbook) && customer.OwnedLiterature.Contains(artbook) && shop.Balance == initialBalance + artbook.Price * shop.ProfitFactor);
+            Assert.IsTrue(!shop.OwnedLiterature.Contains(artbook) && customer.OwnedLiterature.Any(x => x.ISBN == artbook.ISBN) && shop.Balance == initialBalance + artbook.Price * shop.ProfitFactor);
+        }
+
+        [TestMethod]
+        public void Sell_Fail()
+        {
+            //arrange
+            int initialBalance = 10000;
+            Book artbook = new Book(LitType.ArtBook, "TestTitle", "TestAuthor", 2012, "978-3-16-148410-0", new string[] { "horror", "adventure" }, 342, true, 199.99M);
+            Distributor distributor = new Distributor("aboba", "amogus", "92380483084034");
+            BookShop.BookShop shop = new BookShop.BookShop("aboba", "amogus", "92380483084034", 1.2M, distributor, initialBalance);
+            Customer customer = new Customer("Petro");
+            distributor.PublishBook(artbook);
+            distributor.Sell(artbook, shop);
+
+            //act
+            //assert
+            Assert.ThrowsException<ArgumentException>(() => shop.Sell(artbook, customer));
         }
 
         [TestMethod]
@@ -32,7 +50,7 @@ namespace BookShopTests
             Book artbook = new Book(LitType.ArtBook, "TestTitle", "TestAuthor", 2012, "978-3-16-148410-0", new string[] { "horror", "adventure" }, 342, true, 199.99M);
             Distributor distributor = new Distributor("aboba", "amogus", "92380483084034");
             BookShop.BookShop shop = new BookShop.BookShop("aboba", "amogus", "92380483084034", 1.2M, distributor, initialBalance);
-            artbook.ChangeOwner(distributor);
+            distributor.PublishBook(artbook);
 
             //act
             bool result = shop.OrderBook(artbook, 10);
@@ -49,7 +67,7 @@ namespace BookShopTests
             Book artbook = new Book(LitType.ArtBook, "TestTitle", "TestAuthor", 2012, "978-3-16-148410-0", new string[] { "horror", "adventure" }, 342, true, 199.99M);
             Distributor distributor = new Distributor("aboba", "amogus", "92380483084034");
             BookShop.BookShop shop = new BookShop.BookShop("aboba", "amogus", "92380483084034", 1.2M, distributor, initialBalance);
-            artbook.ChangeOwner(distributor);
+            distributor.PublishBook(artbook);
 
             //act
             bool result = shop.OrderBook(artbook, 10);
