@@ -380,6 +380,12 @@ namespace BookShop
 
             MyShop.Distributor.PublishBook(testBook1);
             MyShop.Distributor.PublishBook(testBook2);
+            MyShop.Distributor.PublishBook(testBook3);
+            MyShop.Distributor.PublishBook(testBook4);
+            MyShop.Distributor.PublishBook(testBook5);
+            MyShop.Distributor.PublishBook(testBook6);
+            MyShop.Distributor.PublishBook(testBook7);
+            MyShop.Distributor.PublishBook(testBook8);
             MyShop.BooksOrdered += Console.WriteLine;
             MyShop.Bomzh += SetBankrupt;
             MyShop.Distributor.BooksProvided += Console.WriteLine;
