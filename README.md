@@ -6,7 +6,6 @@
 [![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
 
 Мій проект представляє собою консольний симулятор діяльності магазину.
-ЩЕ НЕ ЗАВЕРШЕНИЙ, ПО ХОДУ РОБОТИ БУДУТЬ ОНОВЛЕННЯ ЦЬОГО ФАЙЛУ
 
 - Різні види товарів
 - Постачальник
