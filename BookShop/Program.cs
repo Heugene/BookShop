@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.Design;
 using System.Net.Http.Headers;
+using System.Runtime.CompilerServices;
 
 namespace BookShop
 {
@@ -7,6 +8,16 @@ namespace BookShop
     {
         static Distributor distributor = new Distributor("КнигоПринт", "Винників майдан, 49 - Євпаторія, CT / 40363", "+380965358222");
         static BookShop MyShop = new BookShop("Безодня", "Нижанківського майдан, 5 - Миколаїв, LA / 52084", "+380506618619", 1.2m, distributor, 10000);
+        static bool Bankrupt = false;
+
+        static void SetBankrupt(string msg)
+        {
+            if (MyShop.Balance < MyShop.Distributor.OwnedLiterature.Select(x => x.Price).Min())
+            {
+                Bankrupt = true;
+            }
+            Console.WriteLine(msg);
+        }
 
         static void MainMenuShow()
         {
@@ -25,72 +36,81 @@ namespace BookShop
                 "0 - Вийти з програми\n" +
                 "\nВведіть номер пункту меню для вибору: "
                 );
-
-            if (int.TryParse(Console.ReadLine(), out menuChoice))
+            if (!Bankrupt)
             {
-                switch (menuChoice)
+                if (int.TryParse(Console.ReadLine(), out menuChoice))
                 {
-                    case 0:
-                        { Environment.Exit(0); }
-                        break;
-                    case 1:
-                        {
-                            MenuShopInfo();
-                            MainMenuShow();
-                        }
-                        break;
-                    case 2:
-                        {
-                            MenuDistributorInfo();
-                            MainMenuShow();
-                        }
-                        break;
-                    case 3:
-                        {
-                            MenuBookSell();
-                            MainMenuShow();
-                        }
-                        break;
-                    case 4:
-                        {
-                            MenuOrderBooks();
-                            MainMenuShow();
-                        }
-                        break;
-                    case 5:
-                        {
-                            MenuPublishBook();
-                            MainMenuShow();
-                        }
-                        break;
-                    case 6:
-                        {
-                            MenuRetireBook();
-                            MainMenuShow();
-                        }
-                        break;
-                    case 7:
-                        {
-                            MenuViewBookInfo();
-                            MainMenuShow();
-                        }
-                        break;
-                    default:
-                        {
-                            Console.WriteLine("Введіть корректний номер пункту!");
-                            Console.WriteLine("Натисність будь-яку клавішу для продовження...");
-                            Console.ReadKey();
-                            MainMenuShow();
-                        }
-                        break;
+                    switch (menuChoice)
+                    {
+                        case 0:
+                            { Environment.Exit(0); }
+                            break;
+                        case 1:
+                            {
+                                MenuShopInfo();
+                                MainMenuShow();
+                            }
+                            break;
+                        case 2:
+                            {
+                                MenuDistributorInfo();
+                                MainMenuShow();
+                            }
+                            break;
+                        case 3:
+                            {
+                                MenuBookSell();
+                                MainMenuShow();
+                            }
+                            break;
+                        case 4:
+                            {
+                                MenuOrderBooks();
+                                MainMenuShow();
+                            }
+                            break;
+                        case 5:
+                            {
+                                MenuPublishBook();
+                                MainMenuShow();
+                            }
+                            break;
+                        case 6:
+                            {
+                                MenuRetireBook();
+                                MainMenuShow();
+                            }
+                            break;
+                        case 7:
+                            {
+                                MenuViewBookInfo();
+                                MainMenuShow();
+                            }
+                            break;
+                        default:
+                            {
+                                Console.WriteLine("Введіть корректний номер пункту!");
+                                Console.WriteLine("Натисність будь-яку клавішу для продовження...");
+                                Console.ReadKey();
+                                MainMenuShow();
+                            }
+                            break;
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Введіть корректний номер пункту!");
+                    Console.WriteLine("Натисність будь-яку клавішу для продовження...");
+                    Console.ReadKey();
+                    MainMenuShow();
                 }
             }
             else
             {
-                Console.WriteLine("Введіть корректний номер пункту!");
+                Console.WriteLine("Ваш магазин збанкрутував, ви можете тільки вийти з програми");
                 Console.WriteLine("Натисність будь-яку клавішу для продовження...");
                 Console.ReadKey();
-                MainMenuShow();
+                Environment.Exit(0);
             }
         }
 
@@ -160,21 +180,11 @@ namespace BookShop
                         break;
                     }
                 }
-                if (MyShop.Balance >= bookOrdered.Price * quantity)
+                if (!MyShop.OrderBook(bookOrdered, quantity))
                 {
-                    if (MyShop.OrderBook(bookOrdered, quantity))
-                    {
-                        Console.WriteLine("Партія успішно замовлена!");
-                    }
-                    else
-                    {
-                        Console.WriteLine("Помилка замовлення");
-                    }
+                    Console.WriteLine("Помилка замовлення");
                 }
-                else
-                {
-                    Console.WriteLine("Недостатньо коштів на балансі магазину");
-                }
+                
             }
             else
             {
@@ -353,6 +363,9 @@ namespace BookShop
             Book testBook2 = new Book(LitType.Book, "Warhammer 40k Horus Rising: The seeds of heresy are sown", "Dan Abnett", 2006, "978-1-84970-382-6", new string[] { "Sci-Fi", "Adventures", "Thriller",  }, 440, true, 479.99M);
             MyShop.Distributor.PublishBook(testBook1);
             MyShop.Distributor.PublishBook(testBook2);
+            MyShop.BooksOrdered += Console.WriteLine;
+            MyShop.Bomzh += SetBankrupt;
+
             MainMenuShow();
             Console.WriteLine("Hello, World!");
         }
