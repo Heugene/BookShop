@@ -1,0 +1,8 @@
+Book testBook1 = new Book(LitType.ArtBook, "Crying Suns artbook", "Alt Shift", 2021, "978-1-9172-2147-4", new string[] { "Sci-Fi", "Adventures" }, 83, true, 299.99M);
+Book testBook2 = new Book(LitType.Book, "Warhammer 40k Horus Rising: The seeds of heresy are sown", "Dan Abnett", 2006, "978-1-84970-382-6", new string[] { "Sci-Fi", "Adventures", "Thriller",  }, 440, true, 479.99M);
+Book testBook3 = new Book(LitType.Book, "From blood and ash", "Jennifer L. Armentrout", 2023, "978-617-548-148-6", new string[] { "Fantasy", "Romance", "New Adult", "Vampires", "Fiction", "Paranormal" }, 627, true, 450);
+Book testBook4 = new Book(LitType.Book, "The love hypothesis", "Ali Hazelwood", 2021, "978-059-333-682-3", new string[] { "Fiction", "Contemporary Romance", "Adult" }, 384, false, 410);
+Book testBook5 = new Book(LitType.Book, "The Cruel Prince", "Holly Black", 2020, "978-966-982-063-1", new string[] { "Fiction", "Fantasy", "Romance", "Magic", "Adult" }, 400, false, 350);
+Book testBook6 = new Book(LitType.Comix, "Katarsis", "Tory Yumino and Lisa Cloud", 2022, "978-617-7782-31-4", new string[] { "Fiction", "Fantasy", "Romance", "Magic", "Fairy Tale" }, 248, false, 290);
+Book testBook7 = new Book(LitType.Comix, "Solo Leveling", "Chugong", 2023, "978-617-7984-41-1", new string[] { "Action" }, 350, true, 429);
+Book testBook8 = new Book(LitType.Book, "Iron Widow", "Xiran Jay Zhao", 2021, "978-073-526-993-4", new string[] { "Fiction", "Fantasy", "Romance", "Sci-Fi", "Adult", "Queer", "LGBT" }, 391, false, 620);
