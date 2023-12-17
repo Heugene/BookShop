@@ -145,14 +145,13 @@ namespace BookShop
             {
                 if (MyShop.Customers.Any(x => x.Name == customerName))
                 {
-                    MyShop.Sell(MyShop.OwnedLiterature.Where(x => x.ISBN == book || x.Name == book).First(), MyShop.Customers.Where(x => x.Name == customerName).First());
+                    MyShop.Sell(MyShop.OwnedLiterature.Where(x => x.ISBN == book || x.Name == book).First(), MyShop.Customers.Where(x => x.Name == customerName).FirstOrDefault());
                 }
                 else
                 {
                     MyShop.Customers.Add(new Customer(customerName));
-                    MyShop.Sell(MyShop.OwnedLiterature.Where(x => x.ISBN == book || x.Name == book).First(), MyShop.Customers.Where(x => x.Name == customerName).First());
+                    MyShop.Sell(MyShop.OwnedLiterature.Where(x => x.ISBN == book || x.Name == book).First(), MyShop.Customers.Where(x => x.Name == customerName).FirstOrDefault());
                 }
-                Console.WriteLine("Книгу було успішно продано!");
             }
             else
             {
@@ -161,6 +160,16 @@ namespace BookShop
             Console.WriteLine();
             Console.WriteLine("Натисність будь-яку клавішу для продовження...");
             Console.ReadKey();
+        }
+
+        private static void OnBookSelling(IBookOwner NewOwner, string message)
+        {
+            Console.WriteLine(message);
+        }
+
+        private static void OnBookSold(Book Item, string message)
+        {
+            Console.WriteLine(message);
         }
 
         public static void MenuOrderBooks()
@@ -365,6 +374,9 @@ namespace BookShop
             MyShop.Distributor.PublishBook(testBook2);
             MyShop.BooksOrdered += Console.WriteLine;
             MyShop.Bomzh += SetBankrupt;
+            MyShop.Distributor.BooksProvided += Console.WriteLine;
+            MyShop.BookSelling += OnBookSelling;
+            MyShop.BookSold += OnBookSold;
 
             MainMenuShow();
             Console.WriteLine("Hello, World!");

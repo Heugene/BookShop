@@ -9,6 +9,7 @@ namespace BookShop
     public class Distributor: Organization, IBookOwner, IBookSeller
     {
         public List<Book> OwnedLiterature { get; set; }
+        public Action<string> BooksProvided { get; set; }
 
         public Distributor(string name, string address, string phone) : base(name, address, phone)
         {
@@ -23,6 +24,7 @@ namespace BookShop
                 Book newBook = (Book)Item.Clone();
                 NewOwner.OwnedLiterature.Add(newBook);
                 newBook.ChangeOwner(NewOwner);
+                BooksProvided?.Invoke($"Книга '{Item.Name}' успішно замовлена!");
             }
             else
             {

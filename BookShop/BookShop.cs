@@ -9,6 +9,10 @@ namespace BookShop
     public class BookShop: Organization, IBookOwner, IBookSeller
     {
         public delegate void TyBomzh(string message);
+        public delegate void BookSellingHandler(IBookOwner NewOwner, string message);
+        public delegate void BookSoldHandler(Book Item, string message);
+        public event BookSellingHandler BookSelling;
+        public event BookSoldHandler BookSold;
 
         public decimal ProfitFactor { get; private set; } = 1.2M;
         public Distributor Distributor { get; private set; }
@@ -30,10 +34,12 @@ namespace BookShop
         {
             if (OwnedLiterature.Contains(Item))
             {
+                BookSelling?.Invoke(NewOwner, $"Книга {Item.Name} продається покупцеві! {(NewOwner as Customer)?.Name}");
                 Balance += Item.Price * ProfitFactor;
                 NewOwner.OwnedLiterature.Add(Item);
                 Item.ChangeOwner(NewOwner);
                 OwnedLiterature.Remove(Item);
+                BookSold?.Invoke(Item, $"Книга {Item.Name} продана!");
             }
             else
             {
@@ -52,18 +58,12 @@ namespace BookShop
                         Balance -= Item.Price;
                         Distributor.Sell(Item, this);
                     }
-                    if (BooksOrdered != null)
-                    {
-                        BooksOrdered.Invoke("Партія успішно замовлена!");
-                    }
+                    BooksOrdered?.Invoke("Партія успішно замовлена!");
                     return true;
                 }
                 else
                 {
-                    if (Bomzh != null)
-                    {
-                        Bomzh.Invoke("Недостатньо коштів для замовлення!");
-                    }
+                    Bomzh?.Invoke("Недостатньо коштів для замовлення!");
                     return false;
                 }
             }
